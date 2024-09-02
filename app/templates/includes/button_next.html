@@ -1,0 +1,15 @@
+<a href="{% url url %}" id="idNext" data-title="{{title}}">
+    <i class="fa fa-arrow-right" aria-hidden="true"></i>
+    <p>{{title}}</p>
+</a>
+
+<script>
+    const a = document.querySelector('#idNext')
+
+    a.addEventListener('mouseover', e =>{
+        e.target.style.content = 'hello'
+        console.log(e.target.style.content)
+    })
+    
+</script>
+  

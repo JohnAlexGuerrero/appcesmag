@@ -1,0 +1,14 @@
+{% extends "admin/base_site.html" %}
+
+{% load static %}
+
+{% block title %}
+write
+{% endblock title %}
+
+{% block content %}
+
+{% include "includes/button_back.html" with title='Atras' url='home' %}
+
+plantilla {{manual_tecnico.titulo}}
+{% endblock content %}

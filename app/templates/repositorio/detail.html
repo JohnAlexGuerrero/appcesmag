@@ -1,0 +1,280 @@
+{% extends "admin/base.html" %}
+
+{% load static %}
+
+{% block title %}
+    {{object.titulo}}
+{% endblock title %}
+
+{% block content %}
+
+<div class="d-flex justify-content-between w-100">
+  {% include "includes/button_back.html" with title='Atras' url="home" %}
+  <div class="d-flex p-3">
+    <i class="fa fa-user-circle p-2" style="width:36px;"></i>
+    <p class="text-center p-1 mr-3">{{object.user.username.capitalize}}</p>
+    <a href="{% url "logo_upload" pk=object.id %}" class="w-100 btn mx-2" style="width:120px; height:38px;">
+      <i class="fa fa-picture-o"></i>
+      Logo
+    </a>
+    
+    <div class="dropdown">
+      <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+        <i class="fa fa-plus" aria-hidden="true"></i>
+        Crear documento
+      </button>
+      <ul class="dropdown-menu">
+        {% for link, name in categoria_documents %}
+        <li>
+          <a class="dropdown-item" href="{% url "document" link=link %}">
+            {{ name }}
+          </a>
+        </li>
+        {% endfor %}
+      </ul>
+    </div>
+  </div>
+</div>
+
+<div class="w-100">
+  <div class="card shadow">
+      <div class="card-body">
+        <h1 class="h4 fw-bold text-start mb-3 mt-3 text-primary">Manual de Usuario: {{object.titulo}}</h1>
+        <hr>
+        <div class="row">
+          <div class="col-sm-4">
+            <div style="height: 500px; overflow-y: scroll;">
+              <div id="id_section_content" class="mt-4 mb-3 p-2">
+                <h1 class="fw-bold h5">Contenido</h1>
+                <ul>
+                  <li>
+                    <a href="#section-description" class="text-decoration-none">
+                      Sección 1: Descripción 
+                    </a>
+                    <nav class="nav nav-pills flex-column">
+                      <a class="nav-link ms-3 my-1" href="#section-description-logo">1.1. Logo</a>
+                      <a class="nav-link ms-3 my-1" href="#section-description-objetivo">1.2. Objetivo</a>
+                    </nav>
+                  </li>
+                  <li>
+                      <a href="#section-category" class="text-decoration-none">
+                        Sección 2: Categorización del software
+                      </a>
+                  </li>
+                  <li>
+                      <a href="#section-requeriments" class="text-decoration-none">
+                          Sección 3: Funcionalidades claves del software
+                      </a>
+                  </li>
+                  <li>
+                      <a href="#id_section_arquitecture" class="text-decoration-none">
+                          Sección 4: Arquitectura del software
+                      </a>
+                  </li>
+                  <li>
+                      <a href="#id_section_installation" class="text-decoration-none">
+                          Sección 5: Instalación y configuración
+                      </a>
+                  </li>
+                  <li>
+                      <a href="#id_section_authors" class="text-decoration-none">
+                          Sección 6: Autores
+                      </a>
+                  </li>
+                  <li>
+                      <a href="#id_section_problems" class="text-decoration-none">
+                          Sección 7: Solución de problemas
+                      </a>
+                  </li>
+                  <li>
+                      <a href="#id_section_glosary" class="text-decoration-none">
+                          Sección 8: Glosario
+                      </a>
+                  </li>
+                  <li>
+                      <a href="#id_section_anexos" class="text-decoration-none">
+                          Sección 9: Anexos
+                      </a>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-sm-8" style="height: 500px; overflow-y: scroll;">
+            <div id="section-description" class="mb-3 p-2">
+              <h1 class="fw-bold h4">Sección 1: Descripción de producto</h1>
+              <div id="section-description-logo">
+                <h2>1.1. Logo</h2>
+                <h6>Figura 1: {{object.get_logo.name}}</h6>
+                <img src="{{object.get_logo.get_image}}" alt="object.get_logo.name">
+                <h6>Fuente: Elaboración propia</h6>
+                <a href="{% url "image_update" pk=object.get_logo.id %}" class="btn btn-outline-secundary btn-sm">
+                  Editar Logo
+                </a>
+              </div>
+              <br>
+              <div id="section-description-objetivo">
+                <h2>1.2. Objetivo del documento</h2>
+                <p>Se debe mencionar el objetivo del documento, en relación con la información que se presenta.</p>
+              </div>
+            </div>
+
+          </div>
+        </div>
+              
+              <div id="section-category" class="mb-3 p-2">
+                  <div class="d-flex justify-content-between">
+                      <h1 class="fw-bold h4">Sección 2: Categorización de software</h1>
+                      <a class="icon-link text-decoration-none p-2" href="#">
+                          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil" viewBox="0 0 16 16">
+                              <path d="M12.146.146a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1 0 .708l-10 10a.5.5 0 0 1-.168.11l-5 2a.5.5 0 0 1-.65-.65l2-5a.5.5 0 0 1 .11-.168zM11.207 2.5 13.5 4.793 14.793 3.5 12.5 1.207zm1.586 3L10.5 3.207 4 9.707V10h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.293zm-9.761 5.175-.106.106-1.528 3.821 3.821-1.528.106-.106A.5.5 0 0 1 5 12.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.468-.325"/>
+                          </svg>
+                          Editar                                
+                      </a>
+                  </div>
+                  
+                  {% if software.category.type_software %}
+                  <div class="container mt-3">
+                      {% comment %} {% include "repository/category_detail.html" with software=software %}                                 {% endcomment %}
+                  </div>
+                  {% else %}
+                  
+                  {% endif %}
+              </div>
+              
+              <div id="section-requeriments" class="mb-3 p-2">
+                  <div class="d-flex justify-content-between">
+                      <h1 class="fw-bold h4">Sección 3: Funcionales claves del software</h1>
+                      <a class="icon-link text-decoration-none p-2" href="#">
+                          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil" viewBox="0 0 16 16">
+                              <path d="M12.146.146a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1 0 .708l-10 10a.5.5 0 0 1-.168.11l-5 2a.5.5 0 0 1-.65-.65l2-5a.5.5 0 0 1 .11-.168zM11.207 2.5 13.5 4.793 14.793 3.5 12.5 1.207zm1.586 3L10.5 3.207 4 9.707V10h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.293zm-9.761 5.175-.106.106-1.528 3.821 3.821-1.528.106-.106A.5.5 0 0 1 5 12.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.468-.325"/>
+                          </svg>
+                          Editar                                
+                      </a>
+                  </div>
+                  
+                  {% comment %} {% if software.get_requeriments %} {% endcomment %}
+                  {% comment %} {% include "repository/requeriments.html" with requeriments=software.get_requeriments %} {% endcomment %}
+                  {% comment %} {% endif %} {% endcomment %}
+              </div>
+              
+              <div id="id_section_arquitecture" class="mb-3 p-2">
+                  <h1 class="fw-bold h4">Sección 4: Arquitectura del software</h1>
+                  
+                  {% comment %} {% if software.get_requeriments %}
+                  {% include "repository/requeriments.html" with requeriments=software.get_requeriments %}
+                  {% endif %} {% endcomment %}
+              </div>
+              
+              <div id="id_section_installation" class="mb-3 p-2">
+                  <h1 class="fw-bold h4">Sección 5: Instalación y Configuración</h1>
+                  
+                  {% comment %} {% if software.get_requeriments %}
+                  {% include "repository/requeriments.html" with requeriments=software.get_requeriments %}
+                  {% endif %} {% endcomment %}
+              </div>
+              
+              <div id="id_section_requeriments" class="mb-3 p-2">
+                  <h1 class="fw-bold h4">Sección 6: Autores</h1>
+                  
+                  {% comment %} {% if software.get_requeriments %}
+                  {% include "repository/requeriments.html" with requeriments=software.get_requeriments %}
+                  {% endif %} {% endcomment %}
+              </div>
+              
+              <div id="id_section_requeriments" class="mb-3 p-2">
+                  <h1 class="fw-bold h4">Sección 7: Solución de problemas</h1>
+                  
+                  {% comment %} {% if software.get_requeriments %}
+                  {% include "repository/requeriments.html" with requeriments=software.get_requeriments %}
+                  {% endif %} {% endcomment %}
+              </div>
+              
+              <div id="id_section_requeriments" class="mb-3 p-2">
+                  <h1 class="fw-bold h4">Sección 8: Glosario</h1>
+                  
+                  {% comment %} {% if software.get_requeriments %}
+                  {% include "repository/requeriments.html" with requeriments=software.get_requeriments %}
+                  {% endif %} {% endcomment %}
+              </div>
+              
+              <div id="id_section_requeriments" class="mb-3 p-2">
+                  <h1 class="fw-bold h4">Sección 9: Anexos</h1>
+                  
+                  {% comment %} {% if software.get_requeriments %}
+                  {% include "repository/requeriments.html" with requeriments=software.get_requeriments %}
+                  {% endif %} {% endcomment %}
+              </div>
+          </div>
+      </div>
+  </div>
+</div>
+
+<section class="w-100 border">
+  <div class="container">
+    <div class="row">
+      <div class="col-3">
+        <p class="border w-100 btn text-start">{{object.titulo.capitalize}}</p>
+        <nav id="navbar-example3" class="h-100 flex-column align-items-stretch pe-4 border-end">
+          <nav class="nav nav-pills flex-column">
+            <a class="nav-link" href="#item-1">
+              <i class="fa fa-file mx-2" aria-hidden="true"></i>
+              Logo
+            </a>
+            
+            <a class="nav-link" href="#item-2">Item 2</a>
+            <a class="nav-link" href="#item-3">Item 3</a>
+            <nav class="nav nav-pills flex-column">
+              <a class="nav-link ms-3 my-1" href="#item-3-1">Item 3-1</a>
+              <a class="nav-link ms-3 my-1" href="#item-3-2">Item 3-2</a>
+            </nav>
+          </nav>
+        </nav>
+      </div>
+    
+      <div class="col-8">
+        <div data-bs-spy="scroll" data-bs-target="#navbar-example3" data-bs-smooth-scroll="true" class="scrollspy-example-2" tabindex="0">
+          <div id="item-1">
+            <h5>Logo de {{object.titulo.capitalize}}</h5>
+            <img src={{logo.get_image}} alt={{logo.name}} width="150px" height="150px" >
+          </div>
+          <div id="item-1-1">
+            <h5>Item 1-1</h5>
+            <p>...</p>
+          </div>
+          <div id="item-1-2">
+            <h5>Item 1-2</h5>
+            <p>...</p>
+          </div>
+          <div id="item-2">
+            <h4>Item 2</h4>
+            <p>...</p>
+          </div>
+          <div id="item-3">
+            <h4>Item 3</h4>
+            <p>...</p>
+          </div>
+          <div id="item-3-1">
+            <h5>Item 3-1</h5>
+            <p>...</p>
+          </div>
+          <div id="item-3-2">
+            <h5>Item 3-2</h5>
+            <p>...</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-sm-3">
+        
+      </div>
+      <div class="col-sm-8">
+        {% block subcontent %}{% endblock subcontent %}
+      </div>
+    </div>
+  </div>
+</section>
+
+{% endblock content %}

@@ -1,0 +1,38 @@
+{% extends "admin/base.html" %}
+
+{% load static %}
+
+{% block title %}
+Eliminar
+{% endblock title %}
+
+{% block content %}
+<div class="container">
+    <!-- <h1 class="h2 fw-bold text-center">Logo de <strong>{{repositorio.titulo}}</strong></h1> -->
+    <p class="cookieDescription text-center">¿Desea eliminar por completo {{message}}?</p>
+    <hr>
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-body">
+                <img src="" alt="" srcset="">
+                <form method="POST">
+                    {% csrf_token %}
+                    {{ form.as_p }}
+                    <div class="buttonContainer">
+                        <button type="submit" class="btn btn-dark d-flex  text-center">
+                            <i class="fa fa-trash mx-2" aria-hidden="true"></i>
+                            <p>Eliminar</p>
+                        </button>
+                        <input class="acceptButton p-1" type="submit" value="Confirmar">
+                        <a href="{% url "logo_upload" pk=repositorio.id %}" class="declineButton p-1 text-decoration-none text-center" >
+                            <span>Cancelar</span>    
+                        </a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+    
+    
+    {% endblock content %}

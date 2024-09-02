@@ -1,0 +1,70 @@
+{% extends "admin/login.html" %}
+
+{% load static %}
+
+{% block title %}Registro{% endblock title %}
+
+{% block content %}
+
+{% include "includes/button_back.html" with url='login' title='Atras' %}
+
+<div class="d-flex justify-content-center mt-3" >
+
+    <div class="mb-2">
+        <h1 class=" h1 text-center fw-bold mb-3">Registro</h1>
+        <form method="POST">
+            {% csrf_token %}
+            <div class="display flex-column">
+                <label class="form-label">Nombres:</label>
+
+                <div class="row">
+                    <div class="col-sm">
+                        {{ form.first_name }}
+                    </div>
+                    <div class="col-sm">
+                        {{ form.second_name }}
+                    </div>
+                </div>
+            </div>
+
+            <div class="display flex-column">
+                <label class="form-label">Apellidos:</label>
+
+                <div class="row">
+                    <div class="col-sm">
+                        {{ form.last_name }}
+                    </div>
+                    <div class="col-sm">
+                        {{ form.second_last_name }}
+                    </div>
+                </div>
+            </div>
+
+            <div class="display flex-column mt-3">
+                <label class="form-label">Nombre de Usuario:</label>
+                {{ form.username }}
+            </div>
+            <div class="display flex-column">
+                <label for="floatingInputGroup2">Correo electrónico:</label>
+                {{ form.email }}
+            </div>
+
+            <div class="display flex-column mt-2">
+                <label class="form-label">Establecer contraseña:</label>
+                <div class="row">
+                    <div class="col-sm">
+                        {{ form.password1 }}
+                    </div>
+                    <div class="col-sm">
+                        {{ form.password2 }}
+                    </div>
+                </div>          
+            </div>
+            <div class="mt-3 d-flex justify-content-center">
+                <input type="submit" value="REGISTRAR" class="btn btn-dark btn-sm">
+            </div>
+        </form>
+    </div>
+</div>
+
+{% endblock content %}

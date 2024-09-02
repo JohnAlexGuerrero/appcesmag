@@ -1,0 +1,98 @@
+{% extends "admin/base.html" %}
+
+{% load static %}
+
+{% block title %}Image{% endblock title %}
+
+{% block content %}
+<div class="p-1 container mt-5 mb-5" style="width: 30rem;">
+    <h1 class="h2 fw-bold text-center">Definamos el Logo de {{software}}.</h1>
+    <p class="h4 text-secondary text-center">Un logo bien diseñado puede tener un impacto significativo en el éxito de un programa.</p>
+    <hr>
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-body">
+                <form  method="post" enctype="multipart/form-data">
+                    {% csrf_token %}   
+                    <div class="container-upload"> 
+                        <div class="header"> 
+                            <img 
+                                src={% if software.logo  %} {{software.logo}} {% else %} {% static "images/upload_icon.png" %} {% endif %}  
+                                alt={% if software.logo  %} {{software.title}} {% else %} "" {% endif %}  
+                                height="150px";
+                                width="150px";                        
+                                id="id_img"
+                            >
+                            <p>Carga Tú Logo!</p>
+                        </div> 
+                        <label for="id_logo" class="footer"> 
+                            <svg fill="#000000" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"><path d="M15.331 6H8.5v20h15V14.154h-8.169z"></path><path d="M18.153 6h-.009v5.342H23.5v-.002z"></path></g></svg> 
+                            <p id="id_text_file">No hay un archivo</p> 
+                        </label> 
+                        <input id="id_logo" type="file" name="logo" accept="image/*" style="display: none;"> 
+                    </div> 
+                    <label for="file" class="custum-file-upload">
+                        <div class="icon">
+                            <svg viewBox="0 0 24 24" fill="" xmlns="http://www.w3.org/2000/svg"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <path fill-rule="evenodd" clip-rule="evenodd" d="M10 1C9.73478 1 9.48043 1.10536 9.29289 1.29289L3.29289 7.29289C3.10536 7.48043 3 7.73478 3 8V20C3 21.6569 4.34315 23 6 23H7C7.55228 23 8 22.5523 8 22C8 21.4477 7.55228 21 7 21H6C5.44772 21 5 20.5523 5 20V9H10C10.5523 9 11 8.55228 11 8V3H18C18.5523 3 19 3.44772 19 4V9C19 9.55228 19.4477 10 20 10C20.5523 10 21 9.55228 21 9V4C21 2.34315 19.6569 1 18 1H10ZM9 7H6.41421L9 4.41421V7ZM14 15.5C14 14.1193 15.1193 13 16.5 13C17.8807 13 19 14.1193 19 15.5V16V17H20C21.1046 17 22 17.8954 22 19C22 20.1046 21.1046 21 20 21H13C11.8954 21 11 20.1046 11 19C11 17.8954 11.8954 17 13 17H14V16V15.5ZM16.5 11C14.142 11 12.2076 12.8136 12.0156 15.122C10.2825 15.5606 9 17.1305 9 19C9 21.2091 10.7909 23 13 23H20C22.2091 23 24 21.2091 24 19C24 17.1305 22.7175 15.5606 20.9844 15.122C20.7924 12.8136 18.858 11 16.5 11Z" fill=""></path> </g></svg>
+                        </div>
+                        <div class="text">
+                            <span>Click to upload image</span>
+                        </div>
+                        <input id="file" type="file" name="thumbnail">
+                    </label>
+                    {{form.name}}
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <input type="submit" value="Guardar"  class="btn btn-dark">
+                    </div>
+                </form>            
+        </div>
+    </div>
+    <div class="">
+        <form method='POST' enctype="multipart/form-data">
+            {% csrf_token %}
+            
+            
+            <div class="d-flex justify-content-between " style="width:300px;">
+                <input type="submit" class="btn btn-success mt-3" value="Guardar">
+                <button type="button" id="id_delete_file" class="btn d-flex mt-3 btn-sm align-items-center" onclick="deleteFile()">
+                    <svg viewBox="0 0 24 24" fill="none" width="16" heigth="16" xmlns="http://www.w3.org/2000/svg"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <path d="M5.16565 10.1534C5.07629 8.99181 5.99473 8 7.15975 8H16.8402C18.0053 8 18.9237 8.9918 18.8344 10.1534L18.142 19.1534C18.0619 20.1954 17.193 21 16.1479 21H7.85206C6.80699 21 5.93811 20.1954 5.85795 19.1534L5.16565 10.1534Z" stroke="#000000" stroke-width="2"></path> <path d="M19.5 5H4.5" stroke="#000000" stroke-width="2" stroke-linecap="round"></path> <path d="M10 3C10 2.44772 10.4477 2 11 2H13C13.5523 2 14 2.44772 14 3V5H10V3Z" stroke="#000000" stroke-width="2"></path> </g></svg>
+                    Descartar
+                </button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<script>
+    const file = document.querySelector("#id_logo")
+    const textFile = document.querySelector("#id_text_file")
+    const img = document.querySelector('#id_img')
+    const deleteBtn = document.querySelector("#id_delete_file")
+
+    deleteBtn.disabled = true;
+    
+    const selectedFile = e =>{
+        textFile.textContent = e.target.files[0].name
+        if(e.target.files[0]){
+            deleteBtn.disabled = false;
+            const reader = new FileReader()
+            reader.onload = (e)=>{
+                img.src = e.target.result
+            }
+            reader.readAsDataURL(e.target.files[0])
+        }
+    }
+
+    const deleteFile = ()=>{
+        img.src = ''
+        textFile.textContent = "No hay un archivo"
+    }
+
+    file.addEventListener('change', e => selectedFile(e))
+
+
+</script>
+
+{% endblock content %}
+  

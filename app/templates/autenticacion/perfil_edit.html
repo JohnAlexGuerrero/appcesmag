@@ -1,0 +1,18 @@
+{% extends "admin/index.html" %}
+
+{% load static %}
+
+{% block title %}Editar perfil{% endblock title %}
+
+{% block content %}
+perfil
+
+<form action="" method="post">
+    {% csrf_token %}
+    {{form}}
+    {% include "autenticacion/ocupacion_form.html" %}
+    <input type="submit" value="Guardar">
+</form>
+
+
+{% endblock content %}
